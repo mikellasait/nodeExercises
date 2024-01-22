@@ -1,29 +1,30 @@
-import fs from "fs";
-import { yarg } from "./config/plugins/args.plugin";
+import fs from 'fs';
+import { yarg } from './config/plugins/args.plugin';
 
-const { b: base, l: limit, s: show } = yarg;
-
-let bodyMessage = "";
-const header = `
-==============================
-        Tabla de ${base}
-==============================\n
+const { b:base, l:limit, s:showTable } = yarg;
+let outputMessage = '';
+const headerMessage = `
+==================================
+       Tabla del ${ base }
+==================================\n
 `;
 
-for (let i = 1; i < limit; i++) {
-  bodyMessage += `${base} x ${i} = ${base * i}\n`;
+for( let i = 1; i <= limit; i++ ) {
+  outputMessage += `${ base } x ${ i } = ${ base * i }\n`;
 }
 
-bodyMessage = header + bodyMessage;
+outputMessage = headerMessage + outputMessage;
 
-const outputPath = "outputs";
-
-if (!fs.existsSync(outputPath)) {
-  fs.mkdirSync(outputPath);
+if ( showTable ) {
+  console.log(outputMessage);
 }
 
-fs.writeFileSync(`${outputPath}/tabla-${base}.txt`, bodyMessage);
+const outputPath = `outputs`;
 
-if (show) {
-  console.log(bodyMessage);
-}
+
+fs.mkdirSync(outputPath, { recursive: true });
+fs.writeFileSync(`${ outputPath }/tabla-${ base }.txt`, outputMessage);
+console.log('File created!');
+
+// grabar en el archivo de salida
+// path: outputs/tabla-5.txt
