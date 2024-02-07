@@ -15,7 +15,8 @@ export class LogEntity {
   static fromJson = (json: string): LogEntity => {
     const log: LogEntity = JSON.parse(json);
 
-    return log;
+    const newLog = new LogEntity(log.level, log.message, log.origin);
+    return newLog;
   };
 
   static fromObject = (object: { [key: string]: any }): LogEntity => {

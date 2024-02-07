@@ -12,3 +12,12 @@ outputs/
 
 custom-outputs/
 test-destination/
+
+mongo/
+postgres/
+logs/
+mongo-test/
+postgres-test/
+
+.env
+.env.test
